@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <script src="https://unpkg.com/aframe-environment-component@1.2.0/dist/aframe-environment-component.min.js"></script>
+    </head>
+    <body>
+        <a-scene id=aframe_scene>
+        <a-entity environment="preset: arches"></a-entity>
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
+        <a-entity
+            animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+            animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+            animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: .1 .1 .5"
+            cursor="fuse: true;"
+            material="color: black; shader: flat"
+            position="0 3 -3"
+            geometry="primitive: box">
+        </a-entity>
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"
+            animation__mouseenter="property: components.material.material.color; type: color; to: blue; startEvents: mouseenter; dur: 500";
+            animation__mouseleave="property: components.material.material.color; type: color; to: red; startEvents: mouseleave; dur: 500";>
+        </a-box>
+        <a-entity rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+            <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        </a-entity>
+        <!-- <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere> -->
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+        <!-- <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
+        <a-sky color="#ECECEC"></a-sky>
+        </a-scene>
+        <script>
+            let i = 0;
+            while(i<100){
+                const box = `
+                    <a-box 
+                    position="${Math.random() *10} ${Math.random() *10} ${Math.random() *10}">                  
+                    </a-box>`
+                const entity = document.createElement("a-entity");
+                entity.innerHTML = box;
+                document.querySelector('#aframe_scene')
+                .appendChild(entity);
+                // aframe_scene.innerHTML+=box;
+                ++i;
+            }
+
+        </script>
+    </body>
+  </html>
